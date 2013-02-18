@@ -5,3 +5,6 @@ The advantages of distributed caching are:
 * Reduces the number of servers needed to handle the requests as most of the requests are served by the cache
 * Reduces the load on the servers fronted by the cache
 * Increases the throughput of the services fronted by the cache
+
+A use case with a 3 node memcahced cluster with 2 clients is shown below
+![Simple EVCache deployment](https://github.com/Netflix/EVCache/blob/master/images/Simple_EVCache.png)
