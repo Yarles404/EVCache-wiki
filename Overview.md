@@ -8,4 +8,6 @@ The advantages of distributed caching are:
 
 A use case with a 3 node memcahced cluster with 2 clients is shown below
 
-![Simple EVCache deployment](https://raw.github.com/Netflix/EVCache/master/images/Simple_EVCache.png?login=pprasanna&token=5c6eb8cfee260be8c45140886aa5aebe)
+![Simple EVCache deployment](https://raw.github.com/Netflix/EVCache/master/images/Simple_EVCache.png?login=smadappa&token=e7a5d0559028b344af320cbb8b25711a)
+
+![Multi-Zone EVCache Deployment](https://raw.github.com/Netflix/EVCache/master/images/Multizone_EVCache.png?login=smadappa&token=00423173e4fb3bd9a2ca3de7cc27eb9e)
