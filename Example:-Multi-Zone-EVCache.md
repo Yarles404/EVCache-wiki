@@ -27,10 +27,11 @@ EVCache evCache = (new EVCache.Builder()).setAppName("EVCACHE_CUSTOMER").setCach
 
 ### Performing operations on EVCache
 ```java
-//Sets the key: "Hello" to value: "World" for a time of 900 seconds in EVCache.
+/*Sets the key: "Hello" to value: "World" for a time of 900 seconds in EVCache. This data will be written to both zones A and B.
+*/
 evCache.set("Hello", "World", 900);
 
-//Gets the value for key: "Hello" from EVCache.
+/*Gets the value for key: "Hello" from EVCache. The data will be retrieved from the zone local to the client. If the client is not in those zones then a zone will be chosen at random.*/
 String value = evCache.get("Hello");
 
 //Deletes the value for key: "Hello" from EVCache.
