@@ -3,4 +3,4 @@
 
 # Using EVCache
 * [Simple EVCache](https://github.com/Netflix/EVCache/wiki/Example:-Simple-EVCache)
-* [Simple EVCache](https://github.com/Netflix/EVCache/wiki/Example:-Multi-Zone-EVCache)
+* [Multi Zone EVCache](https://github.com/Netflix/EVCache/wiki/Example:-Multi-Zone-EVCache)
