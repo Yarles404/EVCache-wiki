@@ -1,6 +1,9 @@
 ### Zone Based Replication
 * Can create clusters based on availability zone for an EVCache app. This improves reliability and availability of the data.
 
+### Zone Affinity for Reads
+* Eliminate cross zone traffic and improve the latency by reading the data from the local zone. 
+
 ### Dynamically re-sizable cluster
 * The cluster size can be changed by adding or removing nodes. The EVCache client automatically configures (Eureka) to the new size. 
 
@@ -13,7 +16,7 @@
 This will incur an additional cost but typically is a lot smaller than going to the source of truth. 
 
 ### Set a zone to write only mode
-When we lose instances in a zone we can set that zone to Write only  until the cache is substantially full. 
+* An availability zone can be set to "Write only Mode" until the cache is substantially full. In this mode all the reads from that zone will be sent to other zones. 
 
 
 ***
