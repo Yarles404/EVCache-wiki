@@ -3,7 +3,7 @@ This is a Integer property which can be used to specify how many connections you
 
 This can be set has a DynamicProperty and the change needs a restart. To change the pool dynamically you can call refreshPool() on the EVCacheClientPoolImplMBean. 
 
-```java
+```property
 # To set the pool size to 2 for EVCACHE_SEARCH set the below property.
 EVCACHE_SEARCH.EVCacheClientPool.poolSize = 2
 ```
