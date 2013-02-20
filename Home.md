@@ -1,5 +1,6 @@
 # Home
 * [Overview](https://github.com/Netflix/EVCache/wiki/Overview)
+* [Building EVCache Client](https://github.com/Netflix/EVCache/wiki/Building-EVCache-Client)
 
 # Using EVCache
 * [Simple EVCache](https://github.com/Netflix/EVCache/wiki/Example:-Simple-EVCache)
