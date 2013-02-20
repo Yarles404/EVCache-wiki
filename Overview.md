@@ -8,14 +8,18 @@ The advantages of distributed caching are:
 
 Simple EVCache Deployment
 =========================
-A 3 node memcahced cluster with 2 clients is shown below
+A 3 node memcached cluster with 2 clients is shown below
 
 ![Simple EVCache deployment](https://raw.github.com/Netflix/EVCache/master/images/Simple_EVCache.png?login=smadappa&token=e7a5d0559028b344af320cbb8b25711a)
 
-All the reads are sharded across the cluster based on [Ketama consistent hashing algorithm](http://www.audioscrobbler.net/development/ketama/). In this mode all the memcached nodes can be in the same availability zone or spread out across multiple availability zones. 
+The data is sharded across the cluster based on [Ketama consistent hashing algorithm](http://www.audioscrobbler.net/development/ketama/). In this mode all the memcached nodes can be in the same availability zone or spread out across multiple availability zones. 
 
-Multi-Zone EVCache Deployment with zone affinity for reads
+Multi-Zone EVCache Deployment with zone affinity 
 =========================
-A use case with a 3 node memcahced cluster with 2 clients is shown below
+A 3 node memcached cluster in 2 availability zones with a client in each zone is shown below
 
 ![Multi-Zone EVCache Deployment](https://raw.github.com/Netflix/EVCache/master/images/Multizone_EVCache.png?login=smadappa&token=00423173e4fb3bd9a2ca3de7cc27eb9e)
+
+The data is sharded across the cluster within the same zone based on [Ketama consistent hashing algorithm](http://www.audioscrobbler.net/development/ketama/). In this mode all the reads by a client are sent to the same zone whereas the writes are done on both the zones. This ensures that data is replicated across both the zones thus increasing its availability. Since the data is always read from the local zone this improves the latency at the sametime improving the data reliability. This approach is best suited if you want to achieve better performance with higher reliability. 
+
+If zone fallback is enabled and some data is lost due to instance failure of eviction, then the data can be fetched from the other zone. This however causes an increase in latency but higher reliability. In most cases fetching data from other zone (fallback zone) is much faster than getting the data from source.
