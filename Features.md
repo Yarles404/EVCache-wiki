@@ -1,5 +1,5 @@
 ### A Key-Value store
-* Uses memcached as the data store
+* Used as a client for memcached using spymemcached
 
 ### Zone Based Replication
 * Can create clusters based on availability zone for an EVCache app. This improves reliability and availability of the data.
