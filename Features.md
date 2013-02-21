@@ -5,7 +5,7 @@
 * Can create clusters based on availability zone for an EVCache app. This improves reliability and availability of the data.
 
 ### Zone Affinity for Reads
-* Eliminate cross zone traffic and improve the latency by reading the data from the local zone. 
+* Eliminate cross zone traffic and improves the latency by reading the data from the local zone. 
 
 ### Dynamically re-sizable cluster
 * The cluster size can be changed by adding or removing nodes. The EVCache client automatically configures (Eureka) to the new size. 
