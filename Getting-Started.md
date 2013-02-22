@@ -12,5 +12,5 @@ evcache.appsToInit=<comma separated list of apps>
    or
 2. Explicitly calling 
 ```java
-EVCacheClientPoolManager.getInstance().initEVCache(<EVCache app name>);
+EVCacheClientPoolManager.getInstance().initEVCache(<EVCache App name>);
 ```
