@@ -8,8 +8,7 @@ This can be done in two ways.
 ```property
 evcache.appsToInit=<comma separated list of apps>
 ```
-<br>
-   or
+or
 2. Explicitly calling 
 ```java
 EVCacheClientPoolManager.getInstance().initEVCache(<EVCache App name>);
