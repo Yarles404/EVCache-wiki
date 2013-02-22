@@ -5,6 +5,7 @@ The first step to use EVCache is to create connections to memcahced server. You 
 This can be done in two ways.
 
 1. By setting the EVCache apps value for property **_evcache.appsToInit_**.
+   or
 2. Explicitly calling 
 ```java
 EVCacheClientPoolManager.getInstance().initEVCache(<EVCache app name>);
