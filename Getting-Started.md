@@ -4,7 +4,7 @@ The first step to use EVCache is to create connections to memcahced server. You 
 ### Creating connections at Startup
 This can be done in two ways.
 
-1. By setting the EVCache apps value for property **_evcache.appsToInit_**.
+1. By setting the EVCache apps value for property **_evcache.appsToInit_**.<br>
    or
 2. Explicitly calling 
 ```java
