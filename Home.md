@@ -1,4 +1,4 @@
-![Logo](https://github.com/Netflix/EVCache/blob/master/images/evcache_logo.png)
+![Logo](https://raw.github.com/Netflix/EVCache/master/images/evcache_logo.png)
 
 # Home
 * [Overview](https://github.com/Netflix/EVCache/wiki/Overview)
