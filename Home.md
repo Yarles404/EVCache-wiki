@@ -1,6 +1,6 @@
+# Home
 ![Logo](https://raw.github.com/Netflix/EVCache/master/images/evcache_logo.png)
 
-# Home
 * [Overview](https://github.com/Netflix/EVCache/wiki/Overview)
 * [Getting Started](https://github.com/Netflix/EVCache/wiki/Getting-Started)
 * [Features](https://github.com/Netflix/EVCache/wiki/Features)
