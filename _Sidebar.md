@@ -1,1 +1,1 @@
-sidebar
+* [[Home]]
