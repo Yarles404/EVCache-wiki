@@ -1,4 +1,5 @@
-* [Overview](https://github.com/Netflix/EVCache/wiki/Overview)
+
+* [Home](https://github.com/Netflix/EVCache/wiki)
 * [Getting Started](https://github.com/Netflix/EVCache/wiki/Getting-Started)
 * [Features](https://github.com/Netflix/EVCache/wiki/Features)
 * [Building EVCache Client](https://github.com/Netflix/EVCache/wiki/Building-EVCache-Client)
