@@ -1,4 +1,3 @@
-
 * [Home](https://github.com/Netflix/EVCache/wiki)
 * [Getting Started](https://github.com/Netflix/EVCache/wiki/Getting-Started)
 * [Features](https://github.com/Netflix/EVCache/wiki/Features)
