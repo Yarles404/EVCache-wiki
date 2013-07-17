@@ -1,4 +1,4 @@
-Below are the set of properties that needs to be set to customize EVCache client. These properties can be use as Java System property [System.setProperty(key, value)] or using [Netflix Archaius](https://github.com/Netflix/archaius). All the properties can be changed dynamically at runtime and will take effect after the change.
+Below are the set of properties that needs to be set to customize EVCache client. These properties can be use as Java System property [System.setProperty(key, value)] or using [Netflix Archaius](https://github.com/Netflix/archaius). All the below properties can be changed dynamically at runtime and will take effect soon after the change.
 
 ### Read Timeout 
 By Default the read timeout is 100 milli seconds. To increase the value set the below property to desired value. 
@@ -8,15 +8,15 @@ By Default the read timeout is 100 milli seconds. To increase the value set the 
 ```
 
 ### Pool Size
-By Default we establish one connection from a Client to the memcached sever. To increase the pool size set the below property to the desired value. 
+By default one connection from a Client is established to the memcached host. To increase the pool size set the below property to the desired value. 
 ```property
 <EVCache App Name>.EVCacheClientPool.poolSize=<size of the pool. Default is 1>
-# NOTE : For most usecases 1 should be enough. YMMV.
+# NOTE : For most use case 1 should be enough. YMMV.
 ```
 
 
 ### Exception Throwing
-By default exceptions are not thrown by EVCache client. If data is not found in the memached server null is returned. To enable throwing of exceptions set the below property. 
+By default exceptions are not thrown by EVCache client. If data is not found in the memached host null is returned. To enable throwing of exceptions set the below property. 
 
 For an EVCache client that has app name and cache name 
 ```property
@@ -29,10 +29,10 @@ For an EVCache client that only has an app name
 ```
 
 
-## EVCache clients using Multi Zone or Eureka 
+## EVCache clients using Multi Availability Zone or Eureka 
 
-### Zone Fallback
-If the data is replicated then on a cache miss EVCache client tries to fall through to other zones to get this data. By enabling this property there we can achieve higher resiliency due to instances or memcached loss. 
+### Availability Zone Fallback
+If the data is replicated then on a cache miss EVCache client tries to fall through to other availability  zones to get this data. By enabling this property we can achieve higher resiliency due to instances or memcached loss. 
 
 For an EVCache client that has app name and cache name 
 ```property
