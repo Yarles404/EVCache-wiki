@@ -61,9 +61,6 @@ This way the hit rate is not affected at the cost of slight increased latency du
 <EVCache App Name>.<Zone>.EVCacheClientPool.writeOnly=true
 ```
 
-
-## Multi Zone EVCache Cluster Properties
-
 ###Specify Zones
 To specify the list of zones set the below property
 ```property
