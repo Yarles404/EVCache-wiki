@@ -75,7 +75,9 @@ To specify a list of hosts that are part of a zone set the below property
 ```
 
 
-## Simple EVCache Cluster properties
+***
+
+## Simple EVCache Cluster specific properties
 
 Memcached hosts in the cluster
 To specify a list of hosts that are part of the cluster set the below property
