@@ -1,4 +1,4 @@
-Below are the set of properties that needs to be set to customize EVCache client. These properties can be use as Java System property ( System.setProperty(key, value)) or using [Netflix Archaius](https://github.com/Netflix/archaius). All the properties can be changed dynamically at runtime and will take effect after the change.
+Below are the set of properties that needs to be set to customize EVCache client. These properties can be use as Java System property [System.setProperty(key, value)] or using [Netflix Archaius](https://github.com/Netflix/archaius). All the properties can be changed dynamically at runtime and will take effect after the change.
 
 ### Read Timeout 
 By Default the read timeout is 100 milli seconds. To increase the value set the below property to desired value. 
