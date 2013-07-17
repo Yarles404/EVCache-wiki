@@ -1,19 +1,18 @@
-Below are the set of properties that needs to be set to customize EVCache client. These properties can be use as Java System property [System.setProperty(key, value)] or using [Netflix Archaius](https://github.com/Netflix/archaius). All the below properties can be changed dynamically at runtime and will take effect soon after the change.
+Below are the set of properties that needs to be set to customize EVCache client. These properties can be set as Java System property [System.setProperty(key, value)] or using [Netflix Archaius](https://github.com/Netflix/archaius). All the below properties can be changed dynamically at runtime and will take effect soon after the change.
 
 ### Read Timeout 
-By Default the read timeout is 100 milli seconds. To increase the value set the below property to desired value. 
+By default the read timeout is 100 milli seconds. To increase it set the below property to the desired value. 
 ```property
 <EVCache App Name>.EVCacheClientPool.readTimeout=<timeout in milliseconds. Default is 100 milliseconds. >
 # NOTE : When client and memcached server are in the same AWS availability zone 100 milliseconds should be sufficient to fetch the data.
 ```
 
 ### Pool Size
-By default one connection from a Client is established to the memcached host. To increase the pool size set the below property to the desired value. 
+By default one connection from a Client is established per memcached host. To increase the pool size set the below property to the desired value. 
 ```property
 <EVCache App Name>.EVCacheClientPool.poolSize=<size of the pool. Default is 1>
 # NOTE : For most use case 1 should be enough. YMMV.
 ```
-
 
 ### Exception Throwing
 By default exceptions are not thrown by EVCache client. If data is not found in the memached host null is returned. To enable throwing of exceptions set the below property. 
