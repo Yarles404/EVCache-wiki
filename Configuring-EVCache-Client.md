@@ -28,6 +28,7 @@ For an EVCache client that only has an app name
 <EVCache App Name>.throw.exception=true
 ```
 
+***
 
 ## EVCache clients using Multi Availability Zone or Eureka 
 
