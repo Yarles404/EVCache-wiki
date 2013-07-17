@@ -79,7 +79,7 @@ To specify a list of hosts that are part of a zone set the below property
 
 ## Simple EVCache Cluster specific properties
 
-Memcached hosts in the cluster
+### Memcached hosts in the cluster
 To specify a list of hosts that are part of the cluster set the below property
 ```property
 <EVCache App Name>.EVCacheClientPool.hosts=<comma serparted list of host:port>
