@@ -13,9 +13,11 @@ System.setProperty("EVCACHE_CUSTOMER.A.EVCacheClientPool.hosts","host1:port,host
 System.setProperty("EVCACHE_CUSTOMER.B.EVCacheClientPool.hosts","host3:port,host4:port");
 ```
 
-The *ZoneClusteredEVCacheClientPool* retrieves the local zone for an EVCache client from the *EC2_AVAILABILITY_ZONE* environment variable. So, make sure this variable is properly defined before starting the EVCache application. This can be accomplished in a Unix hosts via:
+#### Defining the local zone of an EVCache client
+
+The *ZoneClusteredEVCacheClientPool* retrieves the local zone of an EVCache client from the *EC2_AVAILABILITY_ZONE* environment variable. Make sure this variable is properly defined before starting the EVCache application. This can be accomplished in a Unix host by:
 ```bash
-export EC2_AVAILABILITY_ZONE="A"
+export EC2_AVAILABILITY_ZONE="A" #where A is the local availability zone for this EVCache client.
 ```
 
 ### Initializing the pool (optional)
