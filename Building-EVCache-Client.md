@@ -21,4 +21,4 @@
     </pre></code> 
 
 * After a successful build, you can find the following executable jars
-     * EVCache Client (./client/build/libs/client-*.jar )
+     * EVCache Client (./client/build/libs/evcache-client-*.jar )
