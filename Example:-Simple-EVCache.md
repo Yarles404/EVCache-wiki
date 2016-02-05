@@ -3,11 +3,11 @@ Below example depicts the use case for storing customer data in EVCache hosts (h
 ### Setting the Properties
 Set the following properties before initializing EVCache or pass it as a command line argument **-D**
 ```java
-System.setProperty("evcache.pool.provider", "com.netflix.evcache.pool.standalone.SimpleEVCacheClientPoolImpl");
+System.setProperty("EVCACHE.use.simple.node.list.provider", "true");
 /*
 Where host1 and host2 is the name of the host when memcached is running and port is the memcached port 
 */
-System.setProperty("EVCACHE_CUSTOMER.EVCacheClientPool.hosts", "<host1:port>,<host2:port>"); 
+System.setProperty("EVCACHE-NODES", "servergroup0=host01:port,host02:port;servergroup1=host11:port,host12:port;servergroup2=host21:port,host22:port,host23:port"); 
 ```
 
 ### Initializing the pool (optional)
