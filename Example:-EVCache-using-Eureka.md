@@ -1,11 +1,5 @@
 Below example depicts the use case for storing customer data in EVCache and using [Eureka](https://github.com/Netflix/eureka) to discover & manage EVCache instances. The name of the EVCache cluster is called as **EVCACHE_CUSTOMER** and the cache name is called as **cid**. 
 
-### Setting the Properties
-Set the following properties before initializing EVCache or pass it as a command line argument **-D**
-```java
-System.setProperty("evcache.pool.provider", "com.netflix.evcache.pool.eureka.EVCacheClientPoolImpl");
-```
-
 ### Initializing the pool (optional)
 Optionally, you can initialize the EVCache Client Pool when your application/server is starting. This will establish the connection to an EVCache cluster called as **EVCACHE_CUSTOMER**
 ```java
