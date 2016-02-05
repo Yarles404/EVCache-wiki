@@ -1,7 +1,7 @@
 Below example depicts the use case for storing customer data in EVCache and using [Eureka](https://github.com/Netflix/eureka) to discover & manage EVCache instances. The name of the EVCache cluster is called as **EVCACHE_CUSTOMER** and the cache name is called as **cid**. 
 
 ### Creating EVCache instance
-Create an instance of EVCache using the Builder passing the app name **EVCACHE_CUSTOMER** and the cache name called as **cid**. The cache name (optional) is used to prefix the keys stored in EVCache to avoid cache collisions. 
+Create an instance of EVCache using the Builder passing the app name **EVCACHE_CUSTOMER** and the cache prefix called as **cid**. The cache prefix (optional) is used to prefix the keys stored in EVCache to avoid cache collisions if the evcache cluster is shared across multiple use cases. 
 ```java
 
 public class MyClient {
