@@ -1,4 +1,4 @@
-![Logo](https://raw.github.com/Netflix/EVCache/master/images/evcache_logo.png)
+![Logo](https://raw.github.com/Netflix/EVCache/master/images/evcache_logo_text.jpg)
 
 In most applications there is some amount of data that will be frequently used. Some of this data is transient and can be recalculated, while other data will need to be fetched from the database or a middle tier service. In the Netflix Cloud Architecture such data is cached in Memcached servers
 
