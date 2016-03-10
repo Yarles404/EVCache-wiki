@@ -64,13 +64,33 @@ This approach ensures the hit rate is not affected.
 ```
 
 ###Operation Failure Mode
-If an EVCache Operation Fails due to an issue with an EVCache Node (Ex network issue) then you can either retry or cancel the operation
+If a EVCache operation fails due to any EVCache Node issue (Ex network connectivity, instance crash) then you can either retry or cancel the operation
 
 ```property
 <EVCache App Name>.failure.mode=Cancel
 
 # Default : Cancel
 # Other options are Redistribute or Retry
+
+```
+
+##Max Operation Queue Size for Write Operations 
+To control how many write operations can be queued before we start to reject by specifying the below property
+
+```property
+<EVCache App Name>.max.queue.length=16384
+
+# Default : 16384
+
+```
+
+##Max Write Timeout 
+By default the write operations are timed out after 2500 milli-seconds. To increase it set the below property to the desired value. 
+
+```property
+<EVCache App Name>.operation.timeout=2500
+
+# Default : 2500
 
 ```
 
