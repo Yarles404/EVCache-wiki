@@ -72,10 +72,11 @@ Future<Boolean>[] status = myCache.delete("key");
 Similar to set operation you can inspect the status flag to determine if the operation was successful or not. 
 
 ###Writing Test Cases:
-To Init EVCache when AutoBinding is on
+
 ```property
 
 //Init NFLifecycleUnitTester 
+final Properties props = new Properties();
 final NFLifecycleUnitTester unitTester = new NFLifecycleUnitTester(props);
  
 //Get instance of EVCache.Builder
