@@ -1,5 +1,7 @@
 ![Logo](https://raw.github.com/Netflix/EVCache/master/images/evcache_logo_text.jpg)
 
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/AqBz3zvrrVktEA" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> 
+
 In most applications there is some amount of data that will be frequently used. Some of this data is transient and can be recalculated, while other data will need to be fetched from the database or a middle tier service. In the Netflix Cloud Architecture such data is cached in Memcached servers
 
 The advantages of distributed caching are: 
