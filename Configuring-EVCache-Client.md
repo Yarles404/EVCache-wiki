@@ -92,9 +92,14 @@ By default the write operations are timed out after 2500 milli-seconds. To incre
 #Valid Values : 1 and above
 ```
 
-####Enable Chunking:
+***
+###Chunking:
 
 You can optionally chunk data into multiple chunks. This is helpful if you want to store large items by splitting them into smaller chunks. There is a slight overhead while reading or writing the data but chunking ensures that when the sizes of the items changes there are no evictions due to items migrating across memcached slabs.
+
+#####Enable Chunking:
+
+To Enable chunking of data 
 ```property
 <App>.chunk.data=false
 
@@ -112,9 +117,13 @@ To control the size of each chunk specify the following property.
 #Valid Values : 120 and above
 ```
 
-####Enable InMemory Cache:
-
+***
+###InMemory Cache
 You can optionally cache data in EVCache on the client's memory. This can be an effective approach when the data for the same is requested frequently in a tight loop. It can also be used to front immutable data.
+
+#####Enable InMemory Cache:
+To Enable InMemory Cache
+
 ```property
 <App>.use.inmemory.cache=false
 
@@ -122,7 +131,7 @@ You can optionally cache data in EVCache on the client's memory. This can be an 
 #Valid Values : true or false
 ```
 
-####InMemory Max Cache Items:
+#####InMemory Max Cache Items:
 
 To control how many items can be cached in memory specify the following property.
 ```property
@@ -132,7 +141,7 @@ To control how many items can be cached in memory specify the following property
 #Valid Values : 1 and above
 ```
 
-####InMemory Cache Duration:
+#####InMemory Cache Duration:
 
 To control the max time in milliseconds that an item can cached in memory specify the following property.
 ```property
