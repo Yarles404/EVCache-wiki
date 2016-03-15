@@ -263,13 +263,28 @@ The percent of keys to be logged. We get the hashcode of the key and divide by 1
 ```
 
 ####Log Operations:
-The calls to be logged. 
+The calls to be logged to datastores like Hive,kafka or stream them to spark. 
 
 ```property
 <App>.log.operation.calls=SET,DELETE,GMISS,TMISS,BMISS_ALL,TOUCH,REPLACE
 
 #Default: SET,DELETE,GMISS,TMISS,BMISS_ALL,TOUCH,REPLACE
 #Valid Values : SET,DELETE,GMISS,TMISS,BMISS_ALL,TOUCH,REPLACE,GET,INCR,DECR,APPEND,PREPEND,REPLACE
+```
+
+###Logging using slf4j
+EVCache uses slf4j for logging and you can enabled logging to log messages for a provider of your choice. 
+For log4j you can set
+
+```property
+log4j.logger.com.netflix.evcache.EVCacheImpl=<level>,<appender>
+#DEBUG : This will log all the operations in a detailed way
+#INFO : Cache misses with keys
+
+log4j.logger.com.netflix.evcache.pool.EVCacheClient=<level>,<appender>
+#DEBUG : This will log all the operations in a detailed way
+
+Similarly you can add logging to most of the EVCache classes. Please check the source code for details.
 ```
 
 ***
