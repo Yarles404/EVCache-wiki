@@ -151,6 +151,8 @@ To control the max time in milliseconds that an item can cached in memory specif
 #Valid Values : 1 and above
 ```
 
+***
+
 ####Exception Propagation:
 
 By default exceptions are not thrown by EVCache client. If data is not found in the memached host null is returned. To enable throwing of exceptions set the below property.
@@ -161,4 +163,40 @@ or
 
 #Default: false. 
 #Valid Values : true or false
+```
+
+***
+
+###Ports
+
+#####evcache port:
+The port on which all evcache communication happens. This is the same port memcached is listening on. 
+```property
+evcache.port=11211
+
+#Default: 11211 
+```
+
+#####rend port:
+The port on which all rend communication happens. This is the rend server is listening on. 
+```property
+rend.port=11211
+
+#Default: 11211 
+```
+
+#####UDS memcached Proxy Port
+The port on which all the proxying to memcached happens. This will bypass rend and directly talk to memcached.  
+```property
+udsproxy.memcached.port=22211
+
+#Default: 22211 
+```
+
+#####UDS memento Proxy Port
+The port on which all the proxying to memento happens. This will bypass rend and directly talk to memento.  
+```property
+udsproxy.memento.port=22212
+
+#Default: 22212 
 ```
