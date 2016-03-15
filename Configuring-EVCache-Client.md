@@ -284,8 +284,10 @@ log4j.logger.com.netflix.evcache.EVCacheImpl=<level>,<appender>
 log4j.logger.com.netflix.evcache.pool.EVCacheClient=<level>,<appender>
 #DEBUG : This will log all the operations in a detailed way
 
-Similarly you can add logging to most of the EVCache classes. Please check the source code for details.
 ```
+Similarly you can add logging to most of the EVCache classes. 
+Please check the source code for details.
+
 
 ***
 
