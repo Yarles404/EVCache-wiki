@@ -10,6 +10,51 @@ The max time in milli-seconds the client waits to retrieve the value from EVCach
 #Valid Values : 1 and above
 ```
 
+####Bulk Read Timeout:
+
+The max time in milli-seconds the client waits to retrieve the values from EVCache for the given set of keys.
+```property
+<App>.EVCacheClientPool.bulkReadTimeout=20
+
+#Default: 20 (read timeout value). 
+#Valid Values : 1 and above
+```
+
+####Max Read Queue Length:
+
+The max number of items in queue before we start rejecting read operations (fast fail).
+Note : A reject does not mean we fail the entire operation. If there are multiple server group for this <App> then we try the operation on a server group whose queue is not full and can perform the operation. 
+
+```property
+<App>.max.read.queue.length=5
+
+#Default: 5. 
+#Valid Values : 1 and above
+```
+
+
+####Max Number of Retries:
+
+The Max number of retries across the server groups. For example if you have 3 copies in a region and this property is set to 1 on a cache miss or exception on the first operation we randomly pick one of the remaining server group and try to fetch the data from them. 
+
+```property
+<App>.max.retry.count=1
+
+#Default: 1. 
+#Valid Values : 1 and above
+```
+
+####Retries across all copies:
+
+Retries all the server groups for the <App> to retrieve the data. For example if you have 3 copies in a region and this property is set then on a cache miss or exception on the first operation we try the remaining server group one by one until we are able fetch the data. Use this option if the <App> cannot afford to have a cache miss. In such a setup you will have more than 3 copies per region. 
+
+```property
+<App>.retry.all.copies=false
+
+#Default: false. 
+#Valid Values : true or false
+```
+
 ####Pool Size:
 
 Number of connections from a Client to a memcached host.
@@ -62,6 +107,16 @@ or
 #Valid Values : true or false
 ```
 
+####Dynamic Write Only mode:
+
+When this is enabled we mark a server group as "Write Only" if we were to lose 50% of the instances in that server group. This ensures that we don't even try a server group and fallback to other server group for request. This is especially helpful if a zone is having issues and ensures that client reads are not affected. 
+```property
+EVCacheClientPool.enable.dynamic.writeonly=true 
+
+#Default: true. 
+#Valid Values : true or false
+```
+
 ####Failure Mode:
 
 If a EVCache operation fails due to any EVCache Node issue (Ex network connectivity, instance crash) then you can either retry or cancel the operation.
@@ -91,6 +146,18 @@ By default the write operations are timed out after 2500 milli-seconds. To incre
 #Default: 2500. 
 #Valid Values : 1 and above
 ```
+
+####Max Queue Block Time:
+
+The max time a thread is blocked before the operation is accepted and added to the queue. 
+
+```property
+<App>.operation.QueueMaxBlockTime=10
+
+#Default: 10. 
+#Valid Values : 1 and above
+```
+
 
 ***
 ###Chunking:
@@ -163,6 +230,46 @@ or
 
 #Default: false. 
 #Valid Values : true or false
+```
+
+####Ping Servers:
+
+You can enable to ping EVCache servers (Default : 30 seconds). This ensures the connections remain active and are ready to perform operations. This is helpful when the firewalls in between server the connection if they are idle for a long periods of time. We have noticed issues trying to reestablish connection in such an event if the traffic is suddenly turned on such idle connections. 
+```property
+<App>.ping.servers=false
+
+#Default: false. 
+#Valid Values : true or false
+```
+
+
+***
+###Logging
+
+You can enable logging of evcache operations to datastores like Hive,kafka or stream them to spark. This can be used to get insights into the access behavior of the cache. For example by logging you can find out 
+what should be the optimal TTL for your data? 
+Are there any hot keys? 
+Are there any inefficiencies like you add data to cache which is never read?
+What keys are missing from evcache?
+
+####Logging Percent:
+The percent of keys to be logged. We get the hashcode of the key and divide by 1000. If the result is less than or equal to this value then the operation is logged. 
+
+```property
+<App>.log.operation=0
+
+#Default: 0. 
+#Valid Values : 0 to 1000
+```
+
+####Log Operations:
+The calls to be logged. 
+
+```property
+<App>.log.operation.calls=SET,DELETE,GMISS,TMISS,BMISS_ALL,TOUCH,REPLACE
+
+#Default: SET,DELETE,GMISS,TMISS,BMISS_ALL,TOUCH,REPLACE
+#Valid Values : SET,DELETE,GMISS,TMISS,BMISS_ALL,TOUCH,REPLACE,GET,INCR,DECR,APPEND,PREPEND,REPLACE
 ```
 
 ***
