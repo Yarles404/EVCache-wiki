@@ -269,7 +269,8 @@ The calls to be logged to datastores like Hive,kafka or stream them to spark.
 <App>.log.operation.calls=SET,DELETE,GMISS,TMISS,BMISS_ALL,TOUCH,REPLACE
 
 #Default: SET,DELETE,GMISS,TMISS,BMISS_ALL,TOUCH,REPLACE
-#Valid Values : SET,DELETE,GMISS,TMISS,BMISS_ALL,TOUCH,REPLACE,GET,INCR,DECR,APPEND,PREPEND,REPLACE
+#Valid Values : SET,DELETE,GMISS,TMISS,BMISS_ALL,TOUCH,
+#               REPLACE,GET,INCR,DECR,APPEND,PREPEND,REPLACE
 ```
 
 ###Logging using slf4j
