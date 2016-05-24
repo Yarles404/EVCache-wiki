@@ -1,5 +1,5 @@
 * [Home](https://github.com/Netflix/EVCache/wiki)
-* [Getting Started](https://github.com/Netflix/EVCache/wiki/Getting-Started)
+* [Sample EVCache Deployment](https://github.com/Netflix/EVCache/wiki/Sample-EVCache-Deployment)
 * [Using EVCache from Java](https://github.com/Netflix/EVCache/wiki/Using-EVCache-from-Java)
 * [Configuration](https://github.com/Netflix/EVCache/wiki/Configuring-EVCache-Client)
 * [Features](https://github.com/Netflix/EVCache/wiki/Features)
