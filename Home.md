@@ -8,6 +8,16 @@ The advantages of distributed caching are:
 * Reduces the load on the servers fronted by the cache
 * Increases the throughput of the services fronted by the cache
 
+In particular EVCache provides a few advantages over just using memcached:
+
+* It exposes a distributed, replicated cache with a simple memcached-semantics interface (get, set, touch, etc.)
+* Linear scalability of overall data size or network capacity (vs getting a bigger box)
+* Any number of copies of data are supported (some clusters run with 2, others with 9)
+* Operations have topological awareness, retries, fallbacks, and other mechanisms to ensure successful completion (Optimization for AWS architecture)
+* The data in each key can be of any size (with data chunking)
+* Transparent nearline global data replication (described in the recent blog post: http://techblog.netflix.com/2016...) (internal only for now)
+* Seamless cache deployments with no data loss
+
 Simple EVCache Deployment
 =========================
 A 3 node memcached cluster with 2 clients is shown below
