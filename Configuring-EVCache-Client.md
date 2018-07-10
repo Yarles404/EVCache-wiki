@@ -1,6 +1,6 @@
 Below are the set of properties that needs to be set to customize EVCache client. These properties can be set as Java System property [System.setProperty(key, value)] or using [Netflix Archaius](https://github.com/Netflix/archaius). All the below properties can be changed dynamically at runtime and will take effect soon after the change.
 
-####Read Timeout:
+#### Read Timeout:
 
 The max time in milli-seconds the client waits to retrieve the value from EVCache.
 ```property
@@ -10,7 +10,7 @@ The max time in milli-seconds the client waits to retrieve the value from EVCach
 #Valid Values : 1 and above
 ```
 
-####Bulk Read Timeout:
+#### Bulk Read Timeout:
 
 The max time in milli-seconds the client waits to retrieve the values from EVCache for the given set of keys.
 ```property
@@ -20,7 +20,7 @@ The max time in milli-seconds the client waits to retrieve the values from EVCac
 #Valid Values : 1 and above
 ```
 
-####Max Read Queue Length:
+#### Max Read Queue Length:
 
 The max number of items in queue before we start rejecting read operations (fast fail).
 Note : A reject does not mean we fail the entire operation. If there are multiple server group for this <App> then we try the operation on a server group whose queue is not full and can perform the operation. 
@@ -33,7 +33,7 @@ Note : A reject does not mean we fail the entire operation. If there are multipl
 ```
 
 
-####Max Number of Retries:
+#### Max Number of Retries:
 
 The Max number of retries across the server groups. For example if you have 3 copies in a region and this property is set to 1 on a cache miss or exception on the first operation we randomly pick one of the remaining server group and try to fetch the data from them. 
 
@@ -44,7 +44,7 @@ The Max number of retries across the server groups. For example if you have 3 co
 #Valid Values : 1 and above
 ```
 
-####Retries across all copies:
+#### Retries across all copies:
 
 Retries all the server groups for the <App> to retrieve the data. For example if you have 3 copies in a region and this property is set then on a cache miss or exception on the first operation we try the remaining server group one by one until we are able fetch the data. Use this option if the <App> cannot afford to have a cache miss. In such a setup you will have more than 3 copies per region. 
 
@@ -55,7 +55,7 @@ Retries all the server groups for the <App> to retrieve the data. For example if
 #Valid Values : true or false
 ```
 
-####Pool Size:
+#### Pool Size:
 
 Number of connections from a Client to a memcached host.
 ```property
@@ -65,7 +65,7 @@ Number of connections from a Client to a memcached host.
 #Valid Values : 1 and above
 ```
 
-####Zone Fallback:
+#### Zone Fallback:
 
 On a cache miss should the EVCache client try to fall through to other Server Groups to get the requested data.
 ```property
@@ -75,7 +75,7 @@ On a cache miss should the EVCache client try to fall through to other Server Gr
 #Valid Values : true or false
 ```
 
-####Bulk Operation Zone Fallback:
+#### Bulk Operation Zone Fallback:
 
 On a cache miss for Bulk Operations should the EVCache client try to fall through to other Server Groups to get the requested data.
 ```property
@@ -85,7 +85,7 @@ On a cache miss for Bulk Operations should the EVCache client try to fall throug
 #Valid Values : true or false
 ```
 
-####Bulk Operation Partial Zone Fallback:
+#### Bulk Operation Partial Zone Fallback:
 
 If few of the keys are missing for Bulk Operations should the EVCache client try to fall through to other Server Groups to get the missing data.
 ```property
@@ -95,7 +95,7 @@ If few of the keys are missing for Bulk Operations should the EVCache client try
 #Valid Values : true or false
 ```
 
-####Write Only mode:
+#### Write Only mode:
 
 In this mode that server group which is in "write only" accept only writes and all the reads go to other server groups that have read enabled. This is helpful to do any maintenance on the servers by restarting or replacing them. This approach ensures the hit rate is not affected.
 ```property
@@ -107,7 +107,7 @@ or
 #Valid Values : true or false
 ```
 
-####Dynamic Write Only mode:
+#### Dynamic Write Only mode:
 
 When this is enabled we mark a server group as "Write Only" if we were to lose 50% of the instances in that server group. This ensures that we don't even try a server group and fallback to other server group for request. This is especially helpful if a zone is having issues and ensures that client reads are not affected. 
 ```property
@@ -117,7 +117,7 @@ EVCacheClientPool.enable.dynamic.writeonly=true
 #Valid Values : true or false
 ```
 
-####Failure Mode:
+#### Failure Mode:
 
 If a EVCache operation fails due to any EVCache Node issue (Ex network connectivity, instance crash) then you can either retry or cancel the operation.
 ```property
@@ -127,7 +127,7 @@ If a EVCache operation fails due to any EVCache Node issue (Ex network connectiv
 #Valid Values : Cancel, Redistribute or Retry
 ```
 
-####Max Operation Queue Size for Write Operations:
+#### Max Operation Queue Size for Write Operations:
 
 To control how many write operations can be queued before we start to reject by specifying the below property.
 ```property
@@ -137,7 +137,7 @@ To control how many write operations can be queued before we start to reject by 
 #Valid Values : 1 and above
 ```
 
-####Max Write Timeout:
+#### Max Write Timeout:
 
 By default the write operations are timed out after 2500 milli-seconds. To increase it set the below property to the desired value.
 ```property
@@ -147,7 +147,7 @@ By default the write operations are timed out after 2500 milli-seconds. To incre
 #Valid Values : 1 and above
 ```
 
-####Max Queue Block Time:
+#### Max Queue Block Time:
 
 The max time a thread is blocked before the operation is accepted and added to the queue. 
 
@@ -160,11 +160,11 @@ The max time a thread is blocked before the operation is accepted and added to t
 
 
 ***
-###Chunking:
+### Chunking:
 
 You can optionally chunk data into multiple chunks. This is helpful if you want to store large items by splitting them into smaller chunks. There is a slight overhead while reading or writing the data but chunking ensures that when the sizes of the items changes there are no evictions due to items migrating across memcached slabs.
 
-#####Enable Chunking:
+#### Enable Chunking:
 
 To Enable chunking of data 
 ```property
@@ -174,7 +174,7 @@ To Enable chunking of data
 #Valid Values : true or false
 ```
 
-####Chunk Size:
+#### Chunk Size:
 
 To control the size of each chunk specify the following property.
 ```property
@@ -185,10 +185,10 @@ To control the size of each chunk specify the following property.
 ```
 
 ***
-###InMemory Cache
+### InMemory Cache
 You can optionally cache data in EVCache on the client's memory. This can be an effective approach when the data for the same is requested frequently in a tight loop. It can also be used to front immutable data.
 
-#####Enable InMemory Cache:
+#### Enable InMemory Cache:
 To Enable InMemory Cache
 
 ```property
@@ -198,7 +198,7 @@ To Enable InMemory Cache
 #Valid Values : true or false
 ```
 
-#####InMemory Max Cache Items:
+#### InMemory Max Cache Items:
 
 To control how many items can be cached in memory specify the following property.
 ```property
@@ -208,7 +208,7 @@ To control how many items can be cached in memory specify the following property
 #Valid Values : 1 and above
 ```
 
-#####InMemory Cache Duration:
+#### InMemory Cache Duration:
 
 To control the max time in milliseconds that an item can cached in memory specify the following property.
 ```property
@@ -220,7 +220,7 @@ To control the max time in milliseconds that an item can cached in memory specif
 
 ***
 
-####Exception Propagation:
+### Exception Propagation:
 
 By default exceptions are not thrown by EVCache client. If data is not found in the memached host null is returned. To enable throwing of exceptions set the below property.
 ```property
@@ -232,7 +232,7 @@ or
 #Valid Values : true or false
 ```
 
-####Ping Servers:
+#### Ping Servers:
 
 You can enable to ping EVCache servers (Default : 30 seconds). This ensures the connections remain active and are ready to perform operations. This is helpful when the firewalls in between server the connection if they are idle for a long periods of time. We have noticed issues trying to reestablish connection in such an event if the traffic is suddenly turned on such idle connections. 
 ```property
@@ -244,7 +244,7 @@ You can enable to ping EVCache servers (Default : 30 seconds). This ensures the 
 
 
 ***
-###Logging
+### Logging
 
 You can enable logging of evcache operations to datastores like Hive,kafka or stream them to spark. This can be used to get insights into the access behavior of the cache. For example by logging you can find out 
 what should be the optimal TTL for your data? 
@@ -252,7 +252,7 @@ Are there any hot keys?
 Are there any inefficiencies like you add data to cache which is never read?
 What keys are missing from evcache?
 
-####Logging Percent:
+#### Logging Percent:
 The percent of keys to be logged. We get the hashcode of the key and divide by 1000. If the result is less than or equal to this value then the operation is logged. 
 
 ```property
@@ -262,7 +262,7 @@ The percent of keys to be logged. We get the hashcode of the key and divide by 1
 #Valid Values : 0 to 1000
 ```
 
-####Log Operations:
+#### Log Operations:
 The calls to be logged to datastores like Hive,kafka or stream them to spark. 
 
 ```property
@@ -273,7 +273,7 @@ The calls to be logged to datastores like Hive,kafka or stream them to spark.
 #               REPLACE,GET,INCR,DECR,APPEND,PREPEND,REPLACE
 ```
 
-###Logging using slf4j
+#### Logging using slf4j
 EVCache uses slf4j for logging and you can enabled logging to log messages for a provider of your choice. 
 For log4j you can set
 
@@ -292,9 +292,9 @@ Please check the source code for details.
 
 ***
 
-###Ports
+### Ports
 
-#####evcache port:
+#### evcache port:
 The port on which all evcache communication happens. This is the same port memcached is listening on. 
 ```property
 evcache.port=11211
@@ -302,7 +302,7 @@ evcache.port=11211
 #Default: 11211 
 ```
 
-#####rend port:
+#### rend port:
 The port on which all rend communication happens. This is the rend server is listening on. 
 ```property
 rend.port=11211
@@ -310,7 +310,7 @@ rend.port=11211
 #Default: 11211 
 ```
 
-#####UDS memcached Proxy Port
+#### UDS memcached Proxy Port
 The port on which all the proxying to memcached happens. This will bypass rend and directly talk to memcached.  
 ```property
 udsproxy.memcached.port=22211
@@ -318,7 +318,7 @@ udsproxy.memcached.port=22211
 #Default: 22211 
 ```
 
-#####UDS memento Proxy Port
+#### UDS memento Proxy Port
 The port on which all the proxying to memento happens. This will bypass rend and directly talk to memento.  
 ```property
 udsproxy.memento.port=22212
