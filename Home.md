@@ -15,7 +15,7 @@ In particular EVCache provides a few advantages over just using memcached:
 * Any number of copies of data are supported (some clusters run with 2, others with 9)
 * Operations have topological awareness, retries, fallbacks, and other mechanisms to ensure successful completion (Optimization for AWS architecture)
 * The data in each key can be of any size (with data chunking)
-* Transparent nearline global data replication (described in the recent blog post: http://techblog.netflix.com/2016...) (internal only for now)
+* Transparent nearline global data replication (described in the blog post: [https://medium.com/netflix-techblog...](https://medium.com/netflix-techblog/caching-for-a-global-netflix-7bcc457012f1/), internal only for now)
 * Seamless cache deployments with no data loss
 
 Simple EVCache Deployment
