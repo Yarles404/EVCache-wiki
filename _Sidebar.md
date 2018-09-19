@@ -6,5 +6,5 @@
 * [Building EVCache Client](https://github.com/Netflix/EVCache/wiki/Building-EVCache-Client)
 * [FAQ](https://github.com/Netflix/EVCache/wiki/FAQ)
 * Using EVCache
- * [Simple EVCache](https://github.com/Netflix/EVCache/wiki/Example:-Simple-EVCache)
- * [EVCache using Eureka](https://github.com/Netflix/EVCache/wiki/Example:-EVCache-using-Eureka)
+  * [Simple EVCache](https://github.com/Netflix/EVCache/wiki/Example:-Simple-EVCache)
+  * [EVCache using Eureka](https://github.com/Netflix/EVCache/wiki/Example:-EVCache-using-Eureka)
