@@ -1,9 +1,9 @@
-##Prerequisites
+## Prerequisites
 
 * Git version 1.7.11.3 or higher
 * Gradle 1.0-milestone-9 or higher
 
-##Build Steps
+## Build Steps
 
 * Install the latest [git](http://git-scm.com/book/en/Getting-Started-Installing-Git) and [gradle](http://gradle.org/installation) packages.
 
