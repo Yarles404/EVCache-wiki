@@ -24,7 +24,7 @@ This will incur an additional cost but typically is a lot smaller than going to 
 
 ***
 
-##Eureka Specific Features
+## Eureka Specific Features
 
 ### Resilient to state in Eureka
 * Be passive when disconnecting from EVCache server i.e. if eureka drops a server the client should not remove it until the connection is lost. 
