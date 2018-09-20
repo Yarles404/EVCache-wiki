@@ -40,24 +40,25 @@ To set data you need to pass a key and a value. You can also use the overloaded 
 
 #### Notes:
 * The key cannot contain spaces or new lines
-* Values are limited to 1 MB maximum (minus serialization overhead)
+* Values can not exceed the max item size which is configured at memcached (1 MB per default)
 
 #### Use the EVCacheLatch
 If you want to wait for set completion, the latch is a simple API to allow checking for different levels of completion.
 
 ```java
-EVCacheLatch latch = client.set("key", "value", Policy.ALL_MINUS_1)
-latch.await(20, TimeUnit.MILLISECONDS) // wait for 20 ms or until the policy is fulfilled, whichever is shorter
+EVCacheLatch latch = client.set("key", "value", Policy.ALL_MINUS_1);
+latch.await(20, TimeUnit.MILLISECONDS); // wait for 20 ms or until the policy is fulfilled, whichever is shorter
 ```
 
 The latch object will act as a single future to wait on if waiting is required. The policy has several values:
 
 ```java
 public static enum Policy {
-    ONE, QUORUM, ALL_MINUS_1, ALL
+    NONE, ONE, QUORUM, ALL_MINUS_1, ALL
 }
 ```
 
+* `NONE` will release the latch immediately
 * `ONE` will release the latch as soon as one copy is successfully written
 * `QUORUM` will release the latch when a quorum of copies are successful
 * `ALL_MINUS_1` will release the latch when all copies minus 1 are successful. E.g. if you run 3 copies, only 2 will be needed.
