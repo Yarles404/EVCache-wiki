@@ -37,14 +37,14 @@ The build command generates a lot of output. You can ignore all of it if you see
 
 ## STEP 3: Start four local copies of Memcached
 
-Start four copies of Memcached in "daemon" mode on your local host, with a size of one megabyte each, and each using a different port:
+Start four copies of Memcached in "daemon" mode on your local host, each using a different port:
 
-    memcached -d -m 1 -p 11211
-    memcached -d -m 1 -p 11212
-    memcached -d -m 1 -p 11213
-    memcached -d -m 1 -p 11214
+    memcached -d -p 11211
+    memcached -d -p 11212
+    memcached -d -p 11213
+    memcached -d -p 11214
 
-In a real deployment, these would be on separate hosts, with almost all the host RAM assigned to the cache. Usually, they would all use the default Memcached port, 11211.
+In a real deployment, these would be on separate hosts, with almost all the host RAM assigned to the cache. Usually, they would all use the default Memcached port 11211.
 
 ## STEP 4: Create a cache deployment descriptor
 
@@ -80,24 +80,24 @@ After running the sample app, you might want to look at your Memcached stats to 
 
 First, dump the "cmd_set" statistic from each of the two shards that make up the first replica. The output of each of the commands below shows the number of "set" commands that shard has seen since its metrics were last reset.
 
-    echo stats | nc localhost 11211 | grep cmd_set
-    echo stats | nc localhost 11212 | grep cmd_set
+    echo stats | nc localhost 11211 -q 0 | grep cmd_set
+    echo stats | nc localhost 11212 -q 0 | grep cmd_set
 
 You should see that these two shards saw a total of ten "cmd_set" requests. (If you've run the sample more than once, you'll see a multiple of ten.) There won't be a clean 50/50 split in the counts - in each replica, one shard will probably be holding more keys than the other. EVCache's algorithm for assigning keys to shards isn't always perfectly balanced, and with a small number of keys the imbalance can really show.
 
 Next, dump the "set" statistics from the shards that make up the second replica:
 
-    echo stats | nc localhost 11213 | grep cmd_set
-    echo stats | nc localhost 11214 | grep cmd_set
+    echo stats | nc localhost 11213 -q 0 | grep cmd_set
+    echo stats | nc localhost 11214 -q 0 | grep cmd_set
 
 The two shards making up the second replica should show the same total number of cmd_set operations as the first replica, because every SET was sent to both replicas. The distribution might be different from the first shard, though. The assignment of keys to shards is different for each replica.
 
 Now look at the total of the "get" statistics across both replicas:
 
-    echo stats | nc localhost 11211 | grep cmd_get
-    echo stats | nc localhost 11212 | grep cmd_get
-    echo stats | nc localhost 11213 | grep cmd_get
-    echo stats | nc localhost 11214 | grep cmd_get
+    echo stats | nc localhost 11211 -q 0 | grep cmd_get
+    echo stats | nc localhost 11212 -q 0 | grep cmd_get
+    echo stats | nc localhost 11213 -q 0 | grep cmd_get
+    echo stats | nc localhost 11214 -q 0 | grep cmd_get
 
 Among the four shards, you should see a total of ten cmd_get operations. (A multiple of ten if you've run the sample more than once.) For each "get," EVCache first picks a target replica at random; then it computes which shard in that replica should hold the key you're asking for. Finally, the library code performs the "get" on that shard.
 
@@ -107,10 +107,10 @@ When you use the simple configuration style of the sample application, you can't
 
 You can reset the statistics before re-running the sample, to make it easier to see the counts for each run, like this:
 
-    echo stats reset | nc localhost 11211
-    echo stats reset | nc localhost 11212
-    echo stats reset | nc localhost 11213
-    echo stats reset | nc localhost 11214
+    echo stats reset | nc localhost 11211 -q 0
+    echo stats reset | nc localhost 11212 -q 0
+    echo stats reset | nc localhost 11213 -q 0
+    echo stats reset | nc localhost 11214 -q 0
 
 ## Finished - no more steps
 
