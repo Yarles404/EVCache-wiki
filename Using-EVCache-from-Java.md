@@ -1,48 +1,111 @@
 ## Initializing EVCache
+
 The first step to use EVCache is to create the client instance, which will optionally eagerly connect to the memcached servers. You can choose to create the connections either at the start of your application or lazily when you first get the request. If the memcached cluster size is large or spread across multiple availability zones then it is recommended to setup the connections at start up. 
 
 ### Creating EVCache Instance
-To interact with EVCache Server you need to create an instance of the EVCache class.
-You can do that by:
 
-#### Injecting the EVCache.Builder:
+To interact with EVCache Server, create an instance of the EVCache class.
 
-```java
-import com.netflix.evcache.*;
-
-@Inject
-public MyClass(EVCache.Builder evCacheBuilder) {
-        EVCache evCache = evCacheBuilder.setAppName(<EVCache App Name>)
-                                        .setCachePrefix("prefix") // All keys will have this prefix (optional) 
-                                        .enableRetries() // enable cross zone retries
-                                        .setDefaultTTL(100) // Set the Default TTL to be 100 seconds
-                                        .build();
-}
-```
-
-#### Creating a new EVCache.Builder 
+#### Injecting the `EVCache.Builder`
 
 ```java
 import com.netflix.evcache.*;
 
-public MyClass() {
-        EVCache myCache =  new EVCache.Builder().setAppName(<EVCache App Name>)
-                                        .setCachePrefix(<prefix>) // All keys will have this prefix or null 
-                                        .enableRetries() // enable cross zone retries
-                                        .setDefaultTTL(100) // Set the Default TTL to be 100 seconds
-                                        .build();
+class MyClass {
+  @Inject
+  final public MyClass(EVCache.Builder evCacheBuilder) {
+    EVCache evCache = evCacheBuilder.setAppName(<EVCache App Name>)
+        .setCachePrefix("prefix") // All keys will have this prefix (optional) 
+        .enableRetries() // enable cross zone retries
+        .setDefaultTTL(100) // Set the Default TTL to be 100 seconds
+        .build();
+  }
 }
 ```
 
+#### Creating a new `EVCache.Builder` 
 
-### Adding Data to EVCache
-To set data you need to pass a key and a value. You can also use the overloaded methods to pass a custom transcoder and TTL (time to live).
+```java
+import com.netflix.evcache.*;
+
+class MyClass {
+  public MyClass() {
+    final EVCache myCache =  EVCache.Builder.forApp(<EVCache App Name>)
+        .setCachePrefix(<prefix>) // All keys will have this prefix or null 
+        .enableRetries() // enable cross zone retries
+        .setDefaultTTL(100) // Set the Default TTL to be 100 seconds
+        .build();
+  }
+}
+```
+
+#### Customizing Through `EVCacheClientPoolConfigurationProperties`
+
+```java
+import com.netflix.evcache.*;
+
+class MyClass {
+  public MyClass() {
+    final EVCache myCache =  EVCache.Builder.forApp(<EVCache App Name>)
+        .withObjectProvider((fqpn, errorMessage) -> { // An object provider is needed to instantiate the transcoder in the configuration properties below
+          try {
+            return Class.forName(fqpn).newInstance(); // The object can instead be instantiated through the DI framework being used
+          } catch (ClassNotFoundException|IllegalAccessException|InstantiationException e) {
+            logger.warn(errorMessage);
+
+            return null;
+          }
+        })
+        .withConfigurationProperties(new EVCacheClientPoolConfigurationProperties() {
+          @Override
+          public String getTranscoder() {
+            return "com.netflix.evcache.TranscoderStub";
+          }
+        })
+        .build();
+  }
+}
+```
+
+#### Using `EVCache.Builder.Customizer`s
+
+```java
+import com.netflix.evcache.*;
+
+class MyClass {
+  public MyClass() {
+    // Using a lambda
+    final EVCache app1Cache =  EVCache.Builder.forApp(<EVCache App Name 1>)
+        .customizeWith((cacheName, builder) -> {
+          builder.setDefaultTTL(Duration.ofSeconds(12));
+        })
+        .build();
+    
+    // Using Customizers
+    final EVCache app1Cache =  EVCache.Builder.forApp(<EVCache App Name 1>)
+        .addCustomizers(new ArrayList<>(Arrays.asList(new EVCacheBuilder.Customizer() {
+          @Override
+          public void customize(String appName, EVCacheBuilder evCacheBuilder) {
+            evCacheBuilder.setDefaultTTL(Duration.ofSeconds(12));
+          }
+        })))
+        .customize()
+        .build();
+  }
+}
+```
+
+### Adding Data to `EVCache`
+
+To set data, pass a key and a value. You can also use the overloaded methods to pass a custom transcoder and TTL (time to live).
 
 #### Notes:
+
 * The key cannot contain spaces or new lines
 * Values can not exceed the max item size which is configured at memcached (1 MB per default)
 
-#### Use the EVCacheLatch
+#### Using the `EVCacheLatch`
+
 If you want to wait for set completion, the latch is a simple API to allow checking for different levels of completion.
 
 ```java
@@ -64,7 +127,8 @@ public static enum Policy {
 * `ALL_MINUS_1` will release the latch when all copies minus 1 are successful. E.g. if you run 3 copies, only 2 will be needed.
 * `ALL` will release only when all copies have confirmed success. Normally in a dynamic system this is discouraged because a single bad node can cause high latency.
 
-#### Using Futures directly
+#### Using `Future`s directly
+
 If the app does not need to wait for the completion of the request or wants to deal with individual copies' requests directly, the futures API can be used.
 
 ```java
@@ -72,8 +136,8 @@ Future<Boolean>[] status = myCache.set("key","value");
 ```
 You can inspect the status futures to see if the sets to individual copies were successful. If you do call `get()` on the future, your code will block until that request has returned.
 
+### Retrieving data from `EVCache`
 
-### Retrieving data from EVCache
 To synchronously retrieve the value associated with a key:
 
 ```java
@@ -92,7 +156,7 @@ try {
 }
 ```
 
-### Delete data from EVCache
+### Deleting data from `EVCache`
 
 The preferred way to delete from EVCache, when you want to wait for completion, is to use the `EVCacheLatch`:
 
